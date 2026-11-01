@@ -1,0 +1,111 @@
+/* ==========================================================================
+   NORMAL SKIN. The punchline: same HTML, done properly.
+   Active when <html data-theme="normal">.
+   ========================================================================== */
+
+:root[data-theme="normal"] {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --fg: #16181d;
+  --muted: #5f6572;
+  --line: #e4e6ea;
+  --accent: #e8590c;
+  --accent-ink: #ffffff;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="normal"] {
+    --bg: #111317;
+    --surface: #1a1d23;
+    --fg: #f2f3f5;
+    --muted: #a0a6b1;
+    --line: #2b2f37;
+    --accent: #ff7a30;
+    --accent-ink: #16181d;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="normal"] body {
+  margin: 0;
+  padding: 0 20px 64px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root[data-theme="normal"] .page { max-width: 640px; margin: 0 auto; }
+
+:root[data-theme="normal"] a { color: var(--accent); text-decoration: none; }
+:root[data-theme="normal"] a:hover { text-decoration: underline; }
+
+/* Hide the 1998 props. The HTML stays, the joke is a stylesheet. */
+:root[data-theme="normal"] .marquee,
+:root[data-theme="normal"] .badge-new,
+:root[data-theme="normal"] .construction,
+:root[data-theme="normal"] .guestbook,
+:root[data-theme="normal"] .counter,
+:root[data-theme="normal"] .netscape,
+:root[data-theme="normal"] .webring,
+:root[data-theme="normal"] #theme-song,
+:root[data-theme="normal"] .popup,
+:root[data-theme="normal"] .trail-star { display: none !important; }
+
+:root[data-theme="normal"] .hero { padding: 72px 0 32px; }
+:root[data-theme="normal"] h1 {
+  font-size: clamp(34px, 7vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+:root[data-theme="normal"] .tagline { font-size: 20px; color: var(--muted); margin: 0 0 24px; }
+
+:root[data-theme="normal"] .event {
+  display: inline-block;
+  margin: 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 10px 10px 0;
+  font-size: 16px;
+}
+:root[data-theme="normal"] .event strong { display: block; font-weight: 600; }
+:root[data-theme="normal"] .where { color: var(--muted); }
+
+:root[data-theme="normal"] .box { padding: 28px 0; border-top: 1px solid var(--line); }
+:root[data-theme="normal"] h2 {
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); margin: 0 0 14px; font-weight: 600;
+}
+:root[data-theme="normal"] p { margin: 0 0 12px; }
+
+:root[data-theme="normal"] .apps { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+:root[data-theme="normal"] .apps li {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+}
+:root[data-theme="normal"] .apps a { font-weight: 600; font-size: 18px; color: var(--fg); }
+:root[data-theme="normal"] .apps a::after { content: " ↗"; color: var(--accent); font-size: 14px; }
+:root[data-theme="normal"] .app-what { display: block; color: var(--muted); margin-top: 2px; }
+
+:root[data-theme="normal"] .contacts { list-style: none; padding: 0; margin: 0 0 10px; display: flex; flex-wrap: wrap; gap: 10px; }
+:root[data-theme="normal"] .btn {
+  display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px;
+  background: var(--accent); color: var(--accent-ink); border-radius: 10px;
+  font-weight: 600; font-size: 16px; border: 0; cursor: pointer; font-family: inherit;
+}
+:root[data-theme="normal"] .btn:hover { text-decoration: none; filter: brightness(1.08); }
+:root[data-theme="normal"] .small { font-size: 14px; color: var(--muted); }
+
+:root[data-theme="normal"] footer { border-top: 1px solid var(--line); padding-top: 20px; }
+:root[data-theme="normal"] .honest { font-size: 14px; color: var(--muted); }
+
+:root[data-theme="normal"] #theme-toggle {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--surface); color: var(--fg); border: 1px solid var(--line);
+  border-radius: 999px; padding: 10px 16px; font: 600 14px/1 inherit; font-family: inherit;
+  cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+}

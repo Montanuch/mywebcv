@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ugly">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viktor Gorbatiuk — iOS developer @ SiGMA Rome 2026</title>
+<meta name="description" content="Viktor Gorbatiuk, indie iOS developer. Meet me at SiGMA Central Europe, Rome, 2–5 Nov 2026. This page is ugly on purpose. Press the button to see the normal one.">
+<meta property="og:title" content="Viktor Gorbatiuk — iOS developer @ SiGMA Rome 2026">
+<meta property="og:description" content="Ugly on purpose. Press the button to see the normal one.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#ff00ff">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚧</text></svg>">
+<link rel="stylesheet" href="ugly.css" id="css-ugly">
+<link rel="stylesheet" href="normal.css" id="css-normal">
+<!--
+  CONTENT TODO (edit these, everything else is cosmetic):
+  - Telegram handle: search for "TELEGRAM_HANDLE"
+  - Booth / where to find you: search for "WHERE_TO_FIND"
+  - Pitch sentence: section "What I do"
+-->
+</head>
+<body>
+
+<!-- Theme switch. Lives outside the page frame so it is reachable in both skins. -->
+<button id="theme-toggle" type="button" aria-pressed="false">
+  <span class="when-ugly">I get it, make it normal</span>
+  <span class="when-normal">Bring back the horror</span>
+</button>
+
+<div class="page">
+
+  <header class="hero">
+    <div class="marquee" aria-hidden="true"><span>★★★ WELCOME TO MY HOMEPAGE ★★★ MEET ME AT SiGMA CENTRAL EUROPE ★★★ ROME ★★★ 2–5 NOVEMBER 2026 ★★★ WELCOME TO MY HOMEPAGE ★★★ MEET ME AT SiGMA CENTRAL EUROPE ★★★ ROME ★★★ 2–5 NOVEMBER 2026 ★★★&nbsp;</span></div>
+
+    <p class="badge-new" aria-hidden="true">NEW!</p>
+    <h1 class="rainbow">Viktor Gorbatiuk</h1>
+    <p class="tagline">Indie iOS developer. I ship apps solo, end to end.</p>
+
+    <p class="event blink">
+      <strong>MEET ME AT SiGMA CENTRAL EUROPE</strong><br>
+      Rome · 2–5 November 2026<br>
+      <!-- WHERE_TO_FIND -->
+      <span class="where">Find me on the floor or ping me on Telegram</span>
+    </p>
+
+    <p class="construction" aria-hidden="true">🚧 THIS SITE IS UNDER CONSTRUCTION SINCE 1998 🚧</p>
+  </header>
+
+  <main>
+
+    <section class="box" id="what">
+      <h2>What I do</h2>
+      <p>
+        I build iOS apps from idea to App Store on my own: product, SwiftUI, paywall,
+        localization, ASO, release. Three apps live, all shipped solo with AI agents doing the heavy lifting.
+      </p>
+      <p>
+        At SiGMA I want to talk to teams who need a mobile product built fast and
+        shipped properly, and to anyone curious how one person runs a whole app pipeline with AI.
+      </p>
+    </section>
+
+    <section class="box" id="proof">
+      <h2>Proof (real apps, real App Store)</h2>
+      <ul class="apps">
+        <li>
+          <a href="https://apps.apple.com/app/id6762515189" rel="noopener">Flaspek</a>
+          <span class="app-what">Voice scrolling text sign. Say it, and your words become a giant LED banner. 15 languages.</span>
+        </li>
+        <li>
+          <a href="https://apps.apple.com/app/id6797162832" rel="noopener">TodoLot</a>
+          <span class="app-what">Talking reminders. Dictate your to-dos, the alarm reads them back to you out loud.</span>
+        </li>
+        <li>
+          <a href="https://apps.apple.com/app/id6752816843" rel="noopener">Affilist</a>
+          <span class="app-what">Voice affirmations and wake-up alarms in your own voice.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="box" id="contact">
+      <h2>Contact me (please)</h2>
+      <ul class="contacts">
+        <!-- TELEGRAM_HANDLE -->
+        <li><a class="btn" href="https://t.me/TELEGRAM_HANDLE" rel="noopener">✈ Telegram</a></li>
+        <li><a class="btn" href="mailto:vibeprogerai@gmail.com?subject=SiGMA%20Rome">✉ Email</a></li>
+      </ul>
+      <p class="small">Replies within a day, even during the conference. Especially during the conference.</p>
+    </section>
+
+    <section class="box guestbook" id="guestbook" aria-label="Guestbook">
+      <h2>Guestbook</h2>
+      <ol>
+        <li><b>CoolDude1998:</b> first!!!</li>
+        <li><b>WebMaster:</b> plz sign my guestbook</li>
+        <li><b>Mom:</b> very nice site honey</li>
+        <li><b>Recruiter:</b> are you open to new opportunities?</li>
+      </ol>
+      <p class="small">Signing disabled since 2003. Use Telegram.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="counter">
+      You are visitor number
+      <span class="odometer" id="odometer" aria-hidden="true"><span>0</span><span>0</span><span>0</span><span>0</span><span>4</span><span>2</span></span>
+    </p>
+    <p class="netscape">Best viewed in Netscape Navigator 4.0 at 800×600</p>
+    <p class="webring">[ <a href="#" class="dead">&lt;&lt; prev</a> | iOS Devs WebRing | <a href="#" class="dead">next &gt;&gt;</a> ]</p>
+    <p class="small honest">
+      This page looks like this on purpose. It is a business card and a joke.
+      The button in the corner shows the same page done properly.
+      Built with HTML, two CSS files and zero taste.
+    </p>
+    <p><button id="theme-song" type="button">▶ play my theme song</button></p>
+  </footer>
+
+</div>
+
+<!-- The 1998 popup. Shown once per visit, 4 s after load, dismissable, never blocks contact links. -->
+<div id="popup" class="popup" role="dialog" aria-modal="false" aria-labelledby="popup-title" hidden>
+  <div class="popup-inner">
+    <h3 id="popup-title">🎉 CONGRATULATIONS!!! 🎉</h3>
+    <p>You are the <b>1,000,000th</b> visitor!<br>You won a 15-minute chat with an iOS developer.</p>
+    <p>
+      <a class="btn" href="https://t.me/TELEGRAM_HANDLE" rel="noopener">CLAIM PRIZE</a>
+      <button type="button" class="btn" data-close>No thanks</button>
+    </p>
+  </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

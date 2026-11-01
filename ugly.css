@@ -1,0 +1,234 @@
+/* ==========================================================================
+   UGLY SKIN. Every rule here is a deliberate 1998 cliché.
+   Active when <html data-theme="ugly">. Nothing here may break the phone
+   layout or make a contact link unclickable. Motion respects reduced-motion.
+   ========================================================================== */
+
+:root[data-theme="ugly"] {
+  --bg: #00ff00;
+  --fg: #ff00ff;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --box: #ffff00;
+  --border: #ff0000;
+  color-scheme: light;
+}
+
+:root[data-theme="ugly"] .when-normal { display: none; }
+:root[data-theme="normal"] .when-ugly { display: none; }
+
+:root[data-theme="ugly"] body {
+  margin: 0;
+  padding: 0 8px 40px;
+  font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Marker Felt", cursive;
+  font-size: 18px;
+  line-height: 1.35;
+  color: #000080;
+  background-color: var(--bg);
+  /* tiled "stars" background, no image file needed */
+  background-image:
+    radial-gradient(circle at 10px 10px, #ff00ff 2px, transparent 3px),
+    radial-gradient(circle at 30px 25px, #ffff00 2px, transparent 3px),
+    radial-gradient(circle at 50px 5px, #00ffff 2px, transparent 3px),
+    repeating-linear-gradient(45deg, #00ff00 0 12px, #00dd00 12px 24px);
+  background-size: 60px 40px, 60px 40px, 60px 40px, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext y='26' font-size='26'%3E👆%3C/text%3E%3C/svg%3E") 4 4, auto;
+}
+
+:root[data-theme="ugly"] .page {
+  max-width: 800px;
+  margin: 12px auto 0;
+  background: #c0c0c0;
+  border: 6px ridge #ff8800;
+  padding: 10px;
+  box-shadow: 10px 10px 0 #000;
+}
+
+:root[data-theme="ugly"] a { color: var(--link); text-decoration: underline; }
+:root[data-theme="ugly"] a:visited { color: var(--visited); }
+:root[data-theme="ugly"] a:hover { background: #ffff00; color: #ff0000; }
+
+/* ---- Hero ----------------------------------------------------------- */
+:root[data-theme="ugly"] .hero { text-align: center; }
+
+:root[data-theme="ugly"] .marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #000;
+  color: #0f0;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  padding: 4px 0;
+  border: 3px double #0f0;
+}
+:root[data-theme="ugly"] .marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 18s linear infinite;
+}
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+:root[data-theme="ugly"] h1.rainbow {
+  font-size: clamp(32px, 9vw, 64px);
+  margin: 16px 0 4px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #f00, #ff8000, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  animation: rainbow 3s linear infinite;
+  filter: drop-shadow(3px 3px 0 #000);
+}
+@keyframes rainbow { to { background-position: 200% 0; } }
+
+:root[data-theme="ugly"] .badge-new {
+  display: inline-block;
+  margin: 10px 0 0;
+  background: #ff0000;
+  color: #ffff00;
+  font-weight: 900;
+  padding: 4px 14px;
+  border-radius: 50%;
+  border: 3px solid #ffff00;
+  transform: rotate(-12deg);
+  animation: wobble 0.6s ease-in-out infinite alternate;
+}
+@keyframes wobble { from { transform: rotate(-16deg) scale(1); } to { transform: rotate(-6deg) scale(1.12); } }
+
+:root[data-theme="ugly"] .tagline {
+  font-size: 20px;
+  margin: 0 0 14px;
+  color: #000;
+  font-style: italic;
+}
+
+:root[data-theme="ugly"] .event {
+  background: #000080;
+  color: #ffff00;
+  border: 4px outset #ffff00;
+  padding: 12px;
+  margin: 0 auto 12px;
+  font-size: 20px;
+  max-width: 560px;
+}
+:root[data-theme="ugly"] .event strong { font-size: 24px; color: #ff00ff; }
+:root[data-theme="ugly"] .where { color: #00ffff; font-size: 16px; }
+
+:root[data-theme="ugly"] .blink strong { animation: blink 1s steps(2, start) infinite; }
+@keyframes blink { to { visibility: hidden; } }
+
+:root[data-theme="ugly"] .construction {
+  margin: 0 0 8px;
+  padding: 8px;
+  font-weight: 900;
+  color: #000;
+  background: repeating-linear-gradient(45deg, #ffcc00 0 16px, #000 16px 32px);
+  text-shadow: 0 0 4px #ffcc00, 0 0 8px #ffcc00;
+}
+
+/* ---- Boxes --------------------------------------------------------- */
+:root[data-theme="ugly"] .box {
+  background: var(--box);
+  border: 5px inset var(--border);
+  margin: 12px 0;
+  padding: 10px 14px;
+}
+:root[data-theme="ugly"] .box:nth-of-type(2) { background: #00ffff; border-color: #0000ff; }
+:root[data-theme="ugly"] .box:nth-of-type(3) { background: #ff99cc; border-color: #ff00ff; }
+:root[data-theme="ugly"] .box:nth-of-type(4) { background: #ffffff; border-color: #008000; }
+
+:root[data-theme="ugly"] h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  color: #ff0000;
+  text-shadow: 2px 2px 0 #0000ff;
+  text-decoration: underline wavy #00ff00;
+}
+
+:root[data-theme="ugly"] .apps { list-style: none; padding: 0; margin: 0; }
+:root[data-theme="ugly"] .apps li { margin: 0 0 10px; padding-left: 28px; position: relative; }
+:root[data-theme="ugly"] .apps li::before { content: "💾"; position: absolute; left: 0; }
+:root[data-theme="ugly"] .apps a { font-weight: 900; font-size: 20px; }
+:root[data-theme="ugly"] .app-what { display: block; color: #000; }
+
+/* Contact buttons: Windows 95 style, big enough for a thumb. */
+:root[data-theme="ugly"] .contacts { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+:root[data-theme="ugly"] .btn {
+  display: inline-block;
+  min-height: 44px;
+  line-height: 44px;
+  padding: 0 20px;
+  background: #c0c0c0;
+  color: #000 !important;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 20px;
+  border: 3px outset #fff;
+  box-shadow: 2px 2px 0 #000;
+  font-family: inherit;
+  cursor: pointer;
+}
+:root[data-theme="ugly"] .btn:active { border-style: inset; box-shadow: none; }
+:root[data-theme="ugly"] .btn:hover { background: #ffff00; }
+
+:root[data-theme="ugly"] .guestbook ol { padding-left: 24px; margin: 0; }
+:root[data-theme="ugly"] .guestbook li { margin-bottom: 4px; color: #000; }
+:root[data-theme="ugly"] .small { font-size: 14px; color: #000; }
+
+/* ---- Footer -------------------------------------------------------- */
+:root[data-theme="ugly"] footer { text-align: center; color: #000; margin-top: 16px; }
+:root[data-theme="ugly"] .odometer {
+  display: inline-flex; gap: 2px; vertical-align: middle;
+  background: #000; padding: 3px; border: 2px inset #888;
+}
+:root[data-theme="ugly"] .odometer span {
+  display: inline-block; width: 18px; background: #222; color: #0f0;
+  font-family: "Courier New", monospace; font-weight: bold; text-align: center;
+}
+:root[data-theme="ugly"] .netscape { font-size: 12px; margin: 6px 0; }
+:root[data-theme="ugly"] .webring { font-size: 14px; }
+:root[data-theme="ugly"] a.dead { color: #551a8b; }
+:root[data-theme="ugly"] .honest { background: #fff; border: 1px dashed #000; padding: 8px; margin: 10px 0; }
+:root[data-theme="ugly"] #theme-song {
+  font-family: inherit; font-size: 16px; background: #c0c0c0; border: 3px outset #fff; padding: 6px 14px; cursor: pointer;
+}
+
+/* ---- Theme toggle (fixed, always visible) --------------------------- */
+:root[data-theme="ugly"] #theme-toggle {
+  position: fixed; right: 10px; bottom: 10px; z-index: 50;
+  font-family: inherit; font-size: 15px; font-weight: 900;
+  background: #ff00ff; color: #ffff00; border: 3px outset #ff80ff;
+  padding: 10px 14px; cursor: pointer; box-shadow: 3px 3px 0 #000;
+  animation: wobble 1.2s ease-in-out infinite alternate;
+}
+
+/* ---- Popup -------------------------------------------------------- */
+:root[data-theme="ugly"] .popup {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.4); padding: 16px;
+}
+:root[data-theme="ugly"] .popup[hidden] { display: none; }
+:root[data-theme="ugly"] .popup-inner {
+  background: #c0c0c0; border: 4px outset #fff; padding: 16px 20px; max-width: 360px;
+  text-align: center; color: #000; box-shadow: 8px 8px 0 #000;
+}
+:root[data-theme="ugly"] .popup-inner h3 { margin: 0 0 8px; background: #000080; color: #fff; padding: 6px; font-size: 18px; }
+:root[data-theme="ugly"] .popup .btn { margin: 4px; font-size: 16px; }
+
+/* ---- Cursor trail (added by script) --------------------------------- */
+.trail-star {
+  position: fixed; pointer-events: none; z-index: 60; font-size: 18px;
+  animation: trail 0.8s ease-out forwards;
+}
+@keyframes trail { to { opacity: 0; transform: translateY(24px) scale(0.3); } }
+
+/* ---- Accessibility: calm everything down if the OS asks ------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="ugly"] * { animation: none !important; }
+  :root[data-theme="ugly"] .blink strong { visibility: visible; }
+  .trail-star { display: none; }
+}
