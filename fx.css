@@ -133,3 +133,21 @@ details.integration summary::marker { content: "💾 "; }
 @keyframes cat-walk { from { transform: translateX(-60px); } to { transform: translateX(100vw); } }
 @keyframes cat-hop { 0%, 60%, 100% { transform: scaleX(-1) translateY(0); } 80% { transform: scaleX(-1) translateY(-14px); } }
 @keyframes cat-jump { 0% { transform: scaleX(-1) translateY(0); } 40% { transform: scaleX(-1) translateY(-90px) rotate(-20deg); } 100% { transform: scaleX(-1) translateY(0); } }
+
+/* ---- 19. Goldfish ------------------------------------------------------ */
+.fish { left: -70px; font-size: var(--s, 34px); line-height: 1; z-index: 37; opacity: .95;
+  filter: sepia(1) saturate(8) hue-rotate(-15deg) drop-shadow(1px 1px 0 rgba(0,0,0,.35));
+  animation: swim var(--t, 30s) linear infinite; animation-delay: var(--d, 0s); }
+.fish > span { display: inline-block; animation: fish-bob 1.6s ease-in-out infinite alternate; }
+.fish.back { animation-name: swim-back; }
+.fish.back > span { transform: scaleX(-1); animation-name: fish-bob-back; }
+@keyframes swim { to { transform: translateX(calc(100vw + 140px)); } }
+@keyframes swim-back { from { transform: translateX(calc(100vw + 140px)); } to { transform: translateX(0); } }
+@keyframes fish-bob { from { transform: translateY(0) rotate(-6deg); } to { transform: translateY(-10px) rotate(6deg); } }
+@keyframes fish-bob-back { from { transform: scaleX(-1) translateY(0) rotate(6deg); } to { transform: scaleX(-1) translateY(-10px) rotate(-6deg); } }
+.bubble-o { font-size: 14px; z-index: 37; animation: bubble 2.4s ease-out forwards; }
+@keyframes bubble { to { transform: translateY(-120px) scale(1.6); opacity: 0; } }
+.fish.big { left: -200px; opacity: .85; z-index: 36; }
+.fish.big > span { animation-duration: 3.2s; }
+@keyframes swim { to { transform: translateX(calc(100vw + 260px)); } }
+@keyframes swim-back { from { transform: translateX(calc(100vw + 260px)); } to { transform: translateX(0); } }

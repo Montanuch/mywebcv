@@ -248,3 +248,37 @@
   var g = document.getElementById('gravity-btn');
   if (g) g.addEventListener('click', function () { cat.classList.remove('scared'); void cat.offsetWidth; cat.classList.add('scared'); setTimeout(function () { cat.classList.remove('scared'); }, 1000); });
 })();
+
+/* 19. Goldfish. A small school, both directions, bubbles now and then. The page is an aquarium now. */
+(function () {
+  var R = document.documentElement;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ugly = function () { return R.getAttribute('data-theme') === 'ugly'; };
+  var N = innerWidth < 600 ? 4 : 6, fish = [];
+  for (var i = 0; i < N; i++) {
+    var f = document.createElement('div'); f.className = 'fx fish' + (i % 2 ? ' back' : ''); f.innerHTML = '<span>🐟</span>';
+    f.style.top = (8 + Math.random() * 78) + 'vh';
+    f.style.setProperty('--t', (22 + Math.random() * 26).toFixed(0) + 's');
+    f.style.setProperty('--d', (-Math.random() * 30).toFixed(0) + 's');
+    f.style.setProperty('--s', (26 + Math.random() * 18).toFixed(0) + 'px');
+    document.body.appendChild(f); fish.push(f);
+  }
+  // and the big ones: slow, huge, impossible to ignore
+  var BIG = innerWidth < 600 ? 1 : 2;
+  for (var k = 0; k < BIG; k++) {
+    var g = document.createElement('div'); g.className = 'fx fish big' + (k % 2 ? ' back' : ''); g.innerHTML = '<span>🐟</span>';
+    g.style.top = (20 + k * 35 + Math.random() * 15) + 'vh';
+    g.style.setProperty('--t', (50 + Math.random() * 20).toFixed(0) + 's');
+    g.style.setProperty('--d', (-10 - Math.random() * 30).toFixed(0) + 's');
+    g.style.setProperty('--s', (innerWidth < 600 ? 110 : 150) + 'px');
+    document.body.appendChild(g); fish.push(g);
+  }
+  setInterval(function () {
+    if (!ugly() || document.hidden) return;
+    var f = fish[Math.random() * fish.length | 0], r = f.getBoundingClientRect();
+    if (r.width === 0) return;
+    var b = document.createElement('div'); b.className = 'fx bubble-o'; b.textContent = Math.random() < 0.15 ? 'blub' : '○';
+    b.style.left = (r.left + r.width / 2) + 'px'; b.style.top = r.top + 'px';
+    document.body.appendChild(b); setTimeout(function () { b.remove(); }, 2500);
+  }, 1800);
+})();
