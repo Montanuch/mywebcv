@@ -156,3 +156,17 @@
     document.addEventListener('keydown', function () { if (!bsod.hidden) off(); });
   }
 })();
+
+/* 13. "Eyes hurting?" strip after 20 s, once per session. The punchline must be findable. */
+(function () {
+  var R = document.documentElement, bar = document.getElementById('tired');
+  if (!bar) return;
+  var seen = false; try { seen = !!sessionStorage.getItem('tired-seen'); } catch (e) {}
+  if (seen) return;
+  setTimeout(function () {
+    if (R.getAttribute('data-theme') !== 'ugly') return;
+    bar.hidden = false; try { sessionStorage.setItem('tired-seen', '1'); } catch (e) {}
+  }, 20000);
+  document.getElementById('tired-yes').addEventListener('click', function () { bar.hidden = true; document.getElementById('theme-toggle').click(); });
+  document.getElementById('tired-no').addEventListener('click', function () { bar.hidden = true; });
+})();

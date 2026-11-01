@@ -136,3 +136,6 @@
 :root[data-theme="normal"] .progress { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 8px 0; }
 :root[data-theme="normal"] .progress-fill { width: 69%; height: 100%; background: var(--accent); }
 :root[data-theme="normal"] .progress-fill span { display: none; }
+:root[data-theme="normal"] .stickers, :root[data-theme="normal"] .midi, :root[data-theme="normal"] .tired { display: none !important; }
+:root[data-theme="normal"] .quick { margin: 20px 0 0; }
+:root[data-theme="normal"] .quick .btn:first-child { background: var(--fg); color: var(--bg); }
