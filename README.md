@@ -4,7 +4,7 @@ One static page, no build step, no dependencies.
 
 | File | What |
 |---|---|
-| `index.html` | All content. Edit text here. TODO markers: `WHATSAPP_NUMBER`, `LINKEDIN_URL`, `WHERE_TO_FIND`. |
+| `index.html` | All content. Edit text here. All contacts filled in. Hosted on GitHub Pages: https://montanuch.github.io/mywebcv/ (decision 2026-11-02: no custom domain). |
 | `ugly.css` | 1998 skin (default). Every rule is a deliberate cliché. |
 | `normal.css` | Same HTML done properly. The punchline behind the corner button. |
 | `script.js` | Theme toggle, cursor trail, popup, counter, theme song. |
