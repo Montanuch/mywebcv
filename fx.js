@@ -175,7 +175,7 @@
 (function () {
   var b = document.getElementById('more-btn'), m = document.getElementById('more');
   if (b && m) b.addEventListener('click', function () { m.hidden = false; b.parentNode.hidden = true; m.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-  document.querySelectorAll('a[href*="TELEGRAM_HANDLE"]').forEach(function (a) {
+  document.querySelectorAll('a[href*="TELEGRAM_HANDLE"], a[href*="WHATSAPP_NUMBER"], a[href="LINKEDIN_URL"]').forEach(function (a) {
     var li = a.closest('li'); if (li) li.hidden = true; else a.hidden = true;
   });
 })();
