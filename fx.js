@@ -179,3 +179,9 @@
     var li = a.closest('li'); if (li) li.hidden = true; else a.hidden = true;
   });
 })();
+
+/* 16. PLAY THE GAME at the top loads the demo right away instead of only scrolling. */
+(function () {
+  var top = document.getElementById('play-top'), play = document.getElementById('play-inline');
+  if (top && play) top.addEventListener('click', function () { if (!play.hidden) play.click(); });
+})();

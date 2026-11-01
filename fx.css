@@ -116,3 +116,4 @@ details.integration summary::marker { content: "💾 "; }
 #more[hidden] { display: none !important; }
 #more-btn { font-size: 22px; background: #000 !important; color: #0f0 !important; border-color: #0f0 !important; }
 .more-footer { text-align: center; }
+:root[data-theme="ugly"] .quick .danger { display: inline-block; margin: 0; font-size: 18px; min-height: 44px; line-height: 44px; padding: 0 16px; background: #f00 !important; color: #ff0 !important; border: 3px outset #f88; animation: wobble .5s ease-in-out infinite alternate; }
