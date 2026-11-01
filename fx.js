@@ -341,3 +341,20 @@
   var s = document.createElement('script'); s.defer = true; s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
   s.setAttribute('data-cf-beacon', JSON.stringify({ token: t })); document.head.appendChild(s);
 })();
+
+/* 22. WhatsApp without publishing the number.
+   The digits live nowhere in this repo as a readable string: data-wa holds them reversed and
+   base64-encoded, and the real wa.me URL is assembled only when a human taps the button.
+   This stops scrapers and code search, not a person with devtools open. */
+(function () {
+  var TEXT = "Hi Viktor, we met at SiGMA Rome. Let's talk Paper Hands.";
+  document.querySelectorAll('a.wa[data-wa]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var n;
+      try { n = atob(a.getAttribute('data-wa')).split('').reverse().join(''); } catch (err) { return; }
+      if (!/^[0-9]{8,15}$/.test(n)) return;
+      window.location.href = 'https://wa.me/' + n + '?text=' + encodeURIComponent(TEXT);
+    });
+  });
+})();
