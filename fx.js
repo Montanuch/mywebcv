@@ -333,3 +333,9 @@
   }, true);
   window.__emitBuck = emit;
 })();
+
+/* 21. Analytics beacon: do not load it while the token is still the placeholder. */
+(function () {
+  var b = document.querySelector('script[data-cf-beacon*="CF_BEACON_TOKEN"]');
+  if (b) b.remove();
+})();
