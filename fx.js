@@ -334,8 +334,10 @@
   window.__emitBuck = emit;
 })();
 
-/* 21. Analytics beacon: do not load it while the token is still the placeholder. */
+/* 21. Cloudflare Web Analytics: the beacon is injected only once a real token is in the meta tag. */
 (function () {
-  var b = document.querySelector('script[data-cf-beacon*="CF_BEACON_TOKEN"]');
-  if (b) b.remove();
+  var m = document.querySelector('meta[name="cf-beacon-token"]'), t = m && m.getAttribute('content');
+  if (!t || t === 'CF_BEACON_TOKEN' || !/^[0-9a-f]{32}$/.test(t)) return;
+  var s = document.createElement('script'); s.defer = true; s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', JSON.stringify({ token: t })); document.head.appendChild(s);
 })();
