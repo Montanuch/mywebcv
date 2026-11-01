@@ -111,3 +111,8 @@ details.integration summary::marker { content: "💾 "; }
 #bsod { inset: 0; z-index: 210; background: #0000aa; color: #fff; font: 15px/1.5 "Courier New", monospace; padding: 10vh 6vw; cursor: pointer; white-space: pre-wrap; }
 #bsod[hidden] { display: none !important; }
 #bsod b { background: #aaa; color: #0000aa; padding: 0 6px; }
+
+/* ---- 14. The hidden second half ------------------------------------- */
+#more[hidden] { display: none !important; }
+#more-btn { font-size: 22px; background: #000 !important; color: #0f0 !important; border-color: #0f0 !important; }
+.more-footer { text-align: center; }

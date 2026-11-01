@@ -246,7 +246,7 @@
 .splash[hidden] { display: none; }
 .splash-text { margin: 0 0 12px; font-size: 15px; white-space: pre-wrap; }
 .splash-bar { width: min(100%, 420px); height: 22px; border: 2px solid #0f0; padding: 2px; }
-.splash-fill { height: 100%; width: 0; background: repeating-linear-gradient(90deg, #0f0 0 10px, #000 10px 14px); animation: splashfill 1.4s steps(14, end) forwards; }
+.splash-fill { height: 100%; width: 0; background: repeating-linear-gradient(90deg, #0f0 0 10px, #000 10px 14px); animation: splashfill 0.8s steps(14, end) forwards; }
 @keyframes splashfill { to { width: 100%; } }
 .splash-skip { font-size: 12px; opacity: .7; margin: 10px 0 0; }
 :root[data-theme="normal"] .splash { display: none; }
@@ -365,12 +365,20 @@
 :root[data-theme="ugly"] .construction { transform: rotate(1deg); }
 
 /* the background slowly cycles hue, the whole page breathes */
-:root[data-theme="ugly"] .page { animation: hue 14s linear infinite; }
-/* NOT on body: a filter on body would turn every position:fixed gag into a scrolling one */
+/* Only the background cycles. A filter on body or .page would be heavy on phones
+   and (on body) would turn every position:fixed gag into a scrolling one. */
+:root[data-theme="ugly"] body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-color: #00ff00;
+  background-image:
+    radial-gradient(circle at 10px 10px, #ff00ff 2px, transparent 3px),
+    radial-gradient(circle at 30px 25px, #ffff00 2px, transparent 3px),
+    radial-gradient(circle at 50px 5px, #00ffff 2px, transparent 3px),
+    repeating-linear-gradient(45deg, #00ff00 0 12px, #00dd00 12px 24px);
+  background-size: 60px 40px, 60px 40px, 60px 40px, auto;
+  animation: hue 14s linear infinite;
+}
 @keyframes hue { to { filter: hue-rotate(360deg); } }
-/* but the game window and the real contacts must keep their own colors */
-:root[data-theme="ugly"] .win95, :root[data-theme="ugly"] #contact { animation: unhue 14s linear infinite; }
-@keyframes unhue { to { filter: hue-rotate(-360deg); } }
 
 :root[data-theme="ugly"] .quick { justify-content: center; margin: 0 0 12px; position: relative; z-index: 3; }
 :root[data-theme="ugly"] .quick .btn { font-size: 20px; background: #ff0; }
@@ -390,5 +398,5 @@
 @keyframes tired-in { from { transform: translateY(-100%); } }
 
 @media (prefers-reduced-motion: reduce) {
-  :root[data-theme="ugly"] .page, :root[data-theme="ugly"] .win95, :root[data-theme="ugly"] #contact { animation: none !important; }
+  :root[data-theme="ugly"] body::before { animation: none !important; }
 }

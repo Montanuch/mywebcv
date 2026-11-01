@@ -170,3 +170,12 @@
   document.getElementById('tired-yes').addEventListener('click', function () { bar.hidden = true; document.getElementById('theme-toggle').click(); });
   document.getElementById('tired-no').addEventListener('click', function () { bar.hidden = true; });
 })();
+
+/* 14. MAKE IT WORSE reveals the second half. 15. Hide Telegram links until the handle is set. */
+(function () {
+  var b = document.getElementById('more-btn'), m = document.getElementById('more');
+  if (b && m) b.addEventListener('click', function () { m.hidden = false; b.parentNode.hidden = true; m.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  document.querySelectorAll('a[href*="TELEGRAM_HANDLE"]').forEach(function (a) {
+    var li = a.closest('li'); if (li) li.hidden = true; else a.hidden = true;
+  });
+})();

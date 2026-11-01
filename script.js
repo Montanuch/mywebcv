@@ -39,7 +39,7 @@
     else {
       try { sessionStorage.setItem('splash-seen', '1'); } catch (e) {}
       var kill = function () { splash.hidden = true; };
-      setTimeout(kill, 1600);
+      setTimeout(kill, 900);
       splash.addEventListener('click', kill);
       document.addEventListener('keydown', kill, { once: true });
     }
