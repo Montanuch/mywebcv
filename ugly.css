@@ -352,7 +352,7 @@
 :root[data-theme="ugly"] .s4 { right: 4%; top: 42%; background: #ff0; color: #f00; transform: rotate(-10deg); animation-delay: .3s; }
 :root[data-theme="ugly"] .s5 { left: 24%; top: 64%; background: #f0f; color: #ff0; width: 62px; height: 62px; transform: rotate(22deg); font-size: 11px; }
 @keyframes sticker-pulse { to { scale: 1.12; } }
-@media (max-width: 600px) { :root[data-theme="ugly"] .s3, :root[data-theme="ugly"] .s5 { display: none; } }
+@media (max-width: 600px) { :root[data-theme="ugly"] .s3, :root[data-theme="ugly"] .s4, :root[data-theme="ugly"] .s5 { display: none; } }
 
 :root[data-theme="ugly"] .f-impact { font-family: Impact, "Arial Black", sans-serif; font-style: normal; letter-spacing: 1px; color: #f00; text-shadow: 2px 2px 0 #ff0; }
 :root[data-theme="ugly"] .f-papyrus { font-family: Papyrus, "Chalkboard SE", fantasy; color: #080; font-weight: bold; }
