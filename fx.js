@@ -185,3 +185,66 @@
   var top = document.getElementById('play-top'), play = document.getElementById('play-inline');
   if (top && play) top.addEventListener('click', function () { if (!play.hidden) play.click(); });
 })();
+
+/* 17. Toilet paper. Desktop: a roll rides the cursor and unrolls a ribbon behind it.
+       Phone: scrolling unrolls a strip down the right edge. 18. A cat walks the bottom edge and panics on DO NOT PRESS. */
+(function () {
+  var R = document.documentElement;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ugly = function () { return R.getAttribute('data-theme') === 'ugly'; };
+  var fine = matchMedia('(pointer: fine)').matches;
+
+  if (fine) {
+    var cv = document.createElement('canvas'); cv.id = 'paper-canvas'; cv.className = 'fx'; document.body.appendChild(cv);
+    var roll = document.createElement('div'); roll.id = 'paper-roll'; roll.className = 'fx'; roll.textContent = '🧻'; document.body.appendChild(roll);
+    var ctx = cv.getContext('2d'), pts = [], last = null, dist = 0, raf = 0;
+    function size() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); }
+    size(); addEventListener('resize', size);
+    document.addEventListener('mousemove', function (e) {
+      if (!ugly()) return;
+      var p = { x: e.clientX, y: e.clientY, t: performance.now() };
+      if (last) dist += Math.hypot(p.x - last.x, p.y - last.y);
+      last = p; pts.push(p); if (pts.length > 220) pts.shift();
+      roll.style.transform = 'translate(' + (p.x - 17) + 'px,' + (p.y - 17) + 'px) rotate(' + (dist * 2 % 360) + 'deg)';
+      if (!raf) raf = requestAnimationFrame(draw);
+    }, { passive: true });
+    function draw() {
+      raf = 0;
+      var now = performance.now();
+      while (pts.length && now - pts[0].t > 2600) pts.shift();
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      if (pts.length < 2) { if (last && now - last.t < 2600) raf = requestAnimationFrame(draw); return; }
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      // paper body, fading with age
+      for (var i = 1; i < pts.length; i++) {
+        var a = 1 - (now - pts[i].t) / 2600;
+        ctx.strokeStyle = 'rgba(255,255,255,' + a + ')'; ctx.lineWidth = 24;
+        ctx.beginPath(); ctx.moveTo(pts[i - 1].x, pts[i - 1].y); ctx.lineTo(pts[i].x, pts[i].y); ctx.stroke();
+        ctx.strokeStyle = 'rgba(190,190,190,' + a + ')'; ctx.lineWidth = 26; ctx.globalCompositeOperation = 'destination-over';
+        ctx.beginPath(); ctx.moveTo(pts[i - 1].x, pts[i - 1].y); ctx.lineTo(pts[i].x, pts[i].y); ctx.stroke();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+      // perforation ticks
+      ctx.strokeStyle = 'rgba(160,160,160,.8)'; ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
+      for (var j = 8; j < pts.length; j += 8) { var q = pts[j], o = pts[j - 1], dx = q.x - o.x, dy = q.y - o.y, L = Math.hypot(dx, dy) || 1; ctx.beginPath(); ctx.moveTo(q.x - dy / L * 11, q.y + dx / L * 11); ctx.lineTo(q.x + dy / L * 11, q.y - dx / L * 11); ctx.stroke(); }
+      ctx.setLineDash([]);
+      raf = requestAnimationFrame(draw);
+    }
+  } else {
+    var strip = document.createElement('div'); strip.id = 'paper-strip'; strip.className = 'fx'; document.body.appendChild(strip);
+    var tick = false;
+    addEventListener('scroll', function () {
+      if (tick) return; tick = true;
+      requestAnimationFrame(function () {
+        tick = false; if (!ugly()) return;
+        var max = R.scrollHeight - innerHeight, k = max > 0 ? scrollY / max : 0;
+        strip.style.height = Math.max(0, k * (innerHeight - 90)) + 'px';
+        strip.style.setProperty('--rot', (scrollY / 2 % 360) + 'deg');
+      });
+    }, { passive: true });
+  }
+
+  var cat = document.createElement('div'); cat.id = 'cat'; cat.className = 'fx'; cat.innerHTML = '<span>🐈</span>'; document.body.appendChild(cat);
+  var g = document.getElementById('gravity-btn');
+  if (g) g.addEventListener('click', function () { cat.classList.remove('scared'); void cat.offsetWidth; cat.classList.add('scared'); setTimeout(function () { cat.classList.remove('scared'); }, 1000); });
+})();

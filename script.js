@@ -61,24 +61,7 @@
     });
   }
 
-  // 2. Cursor trail
-  if (!reduced && window.matchMedia('(pointer: fine)').matches) {
-    var last = 0;
-    var stars = ['💸', '🧻', '📉', '💸'];
-    document.addEventListener('mousemove', function (e) {
-      if (!isUgly()) return;
-      var now = Date.now();
-      if (now - last < 40) return;
-      last = now;
-      var s = document.createElement('span');
-      s.className = 'trail-star';
-      s.textContent = stars[(Math.random() * stars.length) | 0];
-      s.style.left = (e.clientX - 9) + 'px';
-      s.style.top = (e.clientY - 9) + 'px';
-      document.body.appendChild(s);
-      setTimeout(function () { s.remove(); }, 800);
-    }, { passive: true });
-  }
+  // 2. Cursor trail: replaced by the toilet-paper roll in fx.js
 
   // 3. Popup
   var popup = document.getElementById('popup');
