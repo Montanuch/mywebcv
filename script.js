@@ -30,10 +30,41 @@
 
   function isUgly() { return root.getAttribute('data-theme') === 'ugly'; }
 
+  // 1b. Dial-up splash: gone after 1.6 s, or on any tap/key. Only in the ugly skin, once per session.
+  var splash = document.getElementById('splash');
+  if (splash) {
+    var seen = false;
+    try { seen = !!sessionStorage.getItem('splash-seen'); } catch (e) {}
+    if (!isUgly() || seen || reduced) splash.hidden = true;
+    else {
+      try { sessionStorage.setItem('splash-seen', '1'); } catch (e) {}
+      var kill = function () { splash.hidden = true; };
+      setTimeout(kill, 1600);
+      splash.addEventListener('click', kill);
+      document.addEventListener('keydown', kill, { once: true });
+    }
+  }
+
+  // 1c. Inline demo: load the real game into the Win95 window only when asked.
+  var play = document.getElementById('play-inline');
+  var slot = document.getElementById('demo-frame-slot');
+  if (play && slot) {
+    play.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://paperhandsgame.netlify.app/';
+      f.title = 'Paper Hands demo';
+      f.loading = 'lazy';
+      f.allow = 'autoplay';
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      slot.appendChild(f);
+      play.hidden = true;
+    });
+  }
+
   // 2. Cursor trail
   if (!reduced && window.matchMedia('(pointer: fine)').matches) {
     var last = 0;
-    var stars = ['⭐', '✨', '💫', '🌟'];
+    var stars = ['💸', '🧻', '📉', '💸'];
     document.addEventListener('mousemove', function (e) {
       if (!isUgly()) return;
       var now = Date.now();
@@ -56,7 +87,7 @@
       if (!isUgly()) return;
       popup.hidden = false;
       try { sessionStorage.setItem('popup-seen', '1'); } catch (e) {}
-    }, 4000);
+    }, 5000);
     popup.addEventListener('click', function (e) {
       if (e.target === popup || e.target.hasAttribute('data-close')) popup.hidden = true;
     });

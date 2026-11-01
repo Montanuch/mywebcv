@@ -18,6 +18,7 @@
 :root[data-theme="normal"] .when-ugly { display: none; }
 
 :root[data-theme="ugly"] body {
+  overflow-x: hidden;
   margin: 0;
   padding: 0 8px 40px;
   font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Marker Felt", cursive;
@@ -136,9 +137,6 @@
   margin: 12px 0;
   padding: 10px 14px;
 }
-:root[data-theme="ugly"] .box:nth-of-type(2) { background: #00ffff; border-color: #0000ff; }
-:root[data-theme="ugly"] .box:nth-of-type(3) { background: #ff99cc; border-color: #ff00ff; }
-:root[data-theme="ugly"] .box:nth-of-type(4) { background: #ffffff; border-color: #008000; }
 
 :root[data-theme="ugly"] h2 {
   margin: 0 0 8px;
@@ -231,4 +229,108 @@
   :root[data-theme="ugly"] * { animation: none !important; }
   :root[data-theme="ugly"] .blink strong { visibility: visible; }
   .trail-star { display: none; }
+}
+
+/* ==========================================================================
+   v1 additions: dial-up splash, banner ad, Win95 demo window, teaser, facts
+   ========================================================================== */
+
+/* ---- Dial-up splash (both themes; script removes it) ------------------ */
+.splash {
+  position: fixed; inset: 0; z-index: 200;
+  background: #000; color: #0f0;
+  font-family: "Courier New", monospace;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  padding: 24px; cursor: pointer;
+}
+.splash[hidden] { display: none; }
+.splash-text { margin: 0 0 12px; font-size: 15px; white-space: pre-wrap; }
+.splash-bar { width: min(100%, 420px); height: 22px; border: 2px solid #0f0; padding: 2px; }
+.splash-fill { height: 100%; width: 0; background: repeating-linear-gradient(90deg, #0f0 0 10px, #000 10px 14px); animation: splashfill 1.4s steps(14, end) forwards; }
+@keyframes splashfill { to { width: 100%; } }
+.splash-skip { font-size: 12px; opacity: .7; margin: 10px 0 0; }
+:root[data-theme="normal"] .splash { display: none; }
+
+/* ---- Banner ad ------------------------------------------------------- */
+:root[data-theme="ugly"] .banner-ad {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  max-width: 468px; min-height: 60px; margin: 12px auto 2px;
+  background: linear-gradient(#ffff00, #ff8800);
+  border: 3px solid #ff0000; color: #000 !important; text-decoration: none !important;
+  padding: 4px 10px; font-weight: 900; text-align: center; line-height: 1.15;
+  box-shadow: 4px 4px 0 #000;
+  animation: adshake 0.9s ease-in-out infinite;
+}
+@keyframes adshake { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-1.2deg); } 75% { transform: rotate(1.2deg); } }
+:root[data-theme="ugly"] .ad-left { font-size: 38px; animation: punch 0.5s ease-in-out infinite alternate; }
+@keyframes punch { to { transform: translateX(10px) rotate(-20deg); } }
+:root[data-theme="ugly"] .ad-text { font-size: 15px; }
+:root[data-theme="ugly"] .ad-text b { color: #ff0000; }
+:root[data-theme="ugly"] .ad-flash { animation: blink 0.5s steps(2, start) infinite; color: #0000ff !important; font-size: 20px; }
+:root[data-theme="ugly"] .ad-right {
+  background: #ff0000; color: #fff; padding: 6px 10px; font-size: 13px; border: 2px outset #fff;
+}
+:root[data-theme="ugly"] .ad-footnote { text-align: center; font-size: 11px; margin: 0 0 6px; }
+
+/* ---- Game #1 --------------------------------------------------------- */
+:root[data-theme="ugly"] .live-dot { color: #ff0000; font-size: 16px; animation: blink 1s steps(2, start) infinite; text-shadow: none; }
+:root[data-theme="ugly"] .pitch { color: #000; margin: 0 0 10px; }
+:root[data-theme="ugly"] .facts { padding-left: 22px; margin: 10px 0; color: #000; font-size: 16px; }
+:root[data-theme="ugly"] .facts li { margin-bottom: 4px; }
+:root[data-theme="ugly"] .btn-secondary { background: #e0e0e0; font-size: 16px; }
+
+:root[data-theme="ugly"] .win95 {
+  overflow: hidden; border: 2px outset #fff; background: #c0c0c0; box-shadow: 4px 4px 0 #000; margin: 0 0 10px;
+}
+:root[data-theme="ugly"] .win95-title {
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(90deg, #000080, #1084d0); color: #fff; font-weight: bold;
+  padding: 3px 6px; font-size: 14px; font-family: "MS Sans Serif", Arial, sans-serif;
+}
+:root[data-theme="ugly"] .win95-btns b { display: inline-block; width: 16px; height: 14px; line-height: 12px; text-align: center; background: #c0c0c0; color: #000; border: 1px outset #fff; margin-left: 2px; font-size: 11px; }
+:root[data-theme="ugly"] .win95-body { padding: 4px; background: #000; }
+.play-inline {
+  display: block; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden;
+  padding: 0; border: 0; background: #000; cursor: pointer; position: relative; font-family: inherit;
+}
+.play-inline[hidden] { display: none; }
+.play-inline img { display: block; width: 100%; height: auto; opacity: .85; }
+.play-label {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  background: #ff0000; color: #fff; font-weight: 900; font-size: clamp(14px, 4vw, 22px);
+  padding: 10px 16px; border: 3px outset #ff8080; white-space: normal; max-width: 86%; box-sizing: border-box;
+  text-align: center; box-shadow: 4px 4px 0 #000;
+}
+:root[data-theme="ugly"] .play-label { animation: wobble 0.8s ease-in-out infinite alternate; }
+#demo-frame-slot iframe { display: block; width: 100%; height: min(80vh, 720px); border: 0; background: #000; }
+
+/* ---- Game #2 teaser -------------------------------------------------- */
+:root[data-theme="ugly"] .teaser { background: #000 !important; border: 5px dashed #ff0000 !important; color: #0f0; }
+:root[data-theme="ugly"] .teaser .pitch, :root[data-theme="ugly"] .teaser .small { color: #0f0; }
+:root[data-theme="ugly"] .teaser h2 { color: #0f0; text-shadow: 2px 2px 0 #ff0000; }
+:root[data-theme="ugly"] .redacted { background: #0f0; color: #0f0; user-select: none; }
+:root[data-theme="ugly"] .soon { display: inline-block; background: #ff0000; color: #ff0; font-size: 14px; padding: 2px 8px; transform: rotate(4deg); animation: wobble 0.7s ease-in-out infinite alternate; text-shadow: none; }
+:root[data-theme="ugly"] .progress { border: 3px inset #0f0; background: #003300; height: 28px; padding: 2px; margin: 8px 0; }
+:root[data-theme="ugly"] .progress-fill {
+  width: 69%; height: 100%; background: repeating-linear-gradient(90deg, #0f0 0 12px, #090 12px 16px);
+  color: #000; font-weight: 900; text-align: right; line-height: 22px; padding-right: 6px; box-sizing: border-box;
+  animation: progressjitter 2s steps(3, end) infinite;
+}
+@keyframes progressjitter { 0%,100% { width: 69%; } 33% { width: 71%; } 66% { width: 68%; } }
+:root[data-theme="ugly"] .classified { list-style: none; padding: 0; margin: 8px 0 0; font-family: "Courier New", monospace; font-size: 15px; }
+:root[data-theme="ugly"] .classified li::before { content: "> "; }
+
+:root[data-theme="ugly"] .looking { padding-left: 22px; margin: 0; color: #000; }
+:root[data-theme="ugly"] .looking li { margin-bottom: 8px; }
+:root[data-theme="ugly"] .game-links .btn { font-size: 17px; }
+
+/* Box colors by id now that sections moved around */
+:root[data-theme="ugly"] #game-1 { background: #ffff00; border-color: #ff0000; }
+:root[data-theme="ugly"] #what { background: #00ffff; border-color: #0000ff; }
+:root[data-theme="ugly"] #contact { background: #ff99cc; border-color: #ff00ff; }
+:root[data-theme="ugly"] #guestbook { background: #ffffff; border-color: #008000; }
+
+@media (prefers-reduced-motion: reduce) {
+  .splash { display: none; }
+  :root[data-theme="ugly"] .banner-ad, :root[data-theme="ugly"] .ad-left, :root[data-theme="ugly"] .progress-fill { animation: none !important; }
 }

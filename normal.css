@@ -109,3 +109,30 @@
   border-radius: 999px; padding: 10px 16px; font: 600 14px/1 inherit; font-family: inherit;
   cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.12);
 }
+
+/* ---- v1 additions ----------------------------------------------------- */
+:root[data-theme="normal"] .banner-ad, :root[data-theme="normal"] .ad-footnote,
+:root[data-theme="normal"] .classified, :root[data-theme="normal"] .win95-title { display: none !important; }
+
+:root[data-theme="normal"] .live-dot {
+  display: inline-block; vertical-align: middle; margin-left: 8px; padding: 2px 8px; border-radius: 999px;
+  background: #16a34a; color: #fff; font-size: 11px; letter-spacing: .06em;
+}
+:root[data-theme="normal"] .pitch { font-size: 18px; margin: 0 0 16px; }
+:root[data-theme="normal"] .facts, :root[data-theme="normal"] .looking { padding-left: 20px; margin: 14px 0; color: var(--muted); }
+:root[data-theme="normal"] .facts li, :root[data-theme="normal"] .looking li { margin-bottom: 6px; }
+:root[data-theme="normal"] .looking b { color: var(--fg); }
+
+:root[data-theme="normal"] .win95 { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #000; }
+:root[data-theme="normal"] .win95-body { padding: 0; }
+:root[data-theme="normal"] .play-label {
+  background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,.3);
+}
+:root[data-theme="normal"] .game-links { margin-top: 14px; }
+:root[data-theme="normal"] .btn-secondary { background: var(--surface); color: var(--fg); border: 1px solid var(--line); }
+
+:root[data-theme="normal"] .redacted { background: var(--fg); color: var(--fg); border-radius: 3px; }
+:root[data-theme="normal"] .soon { font-size: 11px; background: var(--accent); color: var(--accent-ink); padding: 2px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
+:root[data-theme="normal"] .progress { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 8px 0; }
+:root[data-theme="normal"] .progress-fill { width: 69%; height: 100%; background: var(--accent); }
+:root[data-theme="normal"] .progress-fill span { display: none; }
