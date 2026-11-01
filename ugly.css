@@ -400,3 +400,12 @@
 @media (prefers-reduced-motion: reduce) {
   :root[data-theme="ugly"] body::before { animation: none !important; }
 }
+
+/* ---- Viktor G ---------------------------------------------------------- */
+:root[data-theme="ugly"] h1 .g { display: inline-block; font-size: 1.7em; line-height: .8; vertical-align: -0.1em; color: #ff00ff; -webkit-text-fill-color: #ff00ff;
+  background: none; text-shadow: 4px 4px 0 #000, 0 0 18px #ff00ff; animation: gpulse .9s ease-in-out infinite alternate; transform-origin: 50% 70%; }
+:root[data-theme="ugly"] h1 .g-arrow { display: inline-block; font-size: .6em; -webkit-text-fill-color: initial; color: initial; background: none; filter: none; animation: gpoint .6s ease-in-out infinite alternate; }
+@keyframes gpulse { from { transform: scale(1) rotate(-4deg); } to { transform: scale(1.18) rotate(4deg); } }
+@keyframes gpoint { from { transform: translateX(-6px); } to { transform: translateX(6px); } }
+:root[data-theme="ugly"] .gspot { margin: 4px 0 2px; font-size: 20px; }
+:root[data-theme="ugly"] .tagline { font-size: 17px; }

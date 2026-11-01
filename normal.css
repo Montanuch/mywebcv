@@ -139,3 +139,7 @@
 :root[data-theme="normal"] .stickers, :root[data-theme="normal"] .midi, :root[data-theme="normal"] .tired { display: none !important; }
 :root[data-theme="normal"] .quick { margin: 20px 0 0; }
 :root[data-theme="normal"] .quick .btn:first-child { background: var(--fg); color: var(--bg); }
+:root[data-theme="normal"] h1 .g-arrow { display: none; }
+:root[data-theme="normal"] h1 .g { color: var(--accent); }
+:root[data-theme="normal"] .gspot { font-size: 18px; margin: 0 0 6px; }
+:root[data-theme="normal"] .gspot .f-papyrus, :root[data-theme="normal"] .gspot .f-courier { color: var(--muted); }
