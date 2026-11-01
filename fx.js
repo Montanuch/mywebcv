@@ -121,7 +121,7 @@
       }, i * 40);
     })(i);
   }
-  var cheat = $('#cheat-btn'); if (cheat) cheat.addEventListener('click', function () { moneyRain(40); });
+  // #cheat-btn now uses the bouncing dollars (section 20)
 
   // 10. Screen check. Phones in portrait pass.
   var sc = $('#screencheck');
@@ -281,4 +281,55 @@
     b.style.left = (r.left + r.width / 2) + 'px'; b.style.top = r.top + 'px';
     document.body.appendChild(b); setTimeout(function () { b.remove(); }, 2500);
   }, 1800);
+})();
+
+/* 20. Bouncing dollars. A tiny physics loop: gravity, floor and wall bounces, damping, spin.
+       Emitted by the paper roll as it unrolls (cursor on desktop, scroll on phones) and by "Make it rain". */
+(function () {
+  var R = document.documentElement;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ugly = function () { return R.getAttribute('data-theme') === 'ugly'; };
+  var P = [], raf = 0, lastT = 0, MAX = 45, G = 2200, SYM = ['💵', '💵', '💵', '💶', '🪙', '💸'];
+  function emit(x, y, vx, vy) {
+    if (!ugly() || P.length >= MAX) return;
+    var el = document.createElement('div'); el.className = 'fx buck'; el.textContent = SYM[Math.random() * SYM.length | 0];
+    document.body.appendChild(el);
+    P.push({ el: el, x: x, y: y, vx: vx, vy: vy, r: Math.random() * 360, vr: (Math.random() - .5) * 720, b: 0, t: 0 });
+    if (!raf) { lastT = performance.now(); raf = requestAnimationFrame(step); }
+  }
+  function step(now) {
+    var dt = Math.min(0.033, (now - lastT) / 1000); lastT = now;
+    var W = innerWidth, H = innerHeight;
+    for (var i = P.length - 1; i >= 0; i--) {
+      var p = P[i];
+      p.vy += G * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt; p.t += dt;
+      if (p.y > H - 28) { p.y = H - 28; p.vy = -p.vy * 0.62; p.vx *= 0.85; p.vr *= 0.7; p.b++; }
+      if (p.x < 0) { p.x = 0; p.vx = -p.vx * 0.8; } else if (p.x > W - 26) { p.x = W - 26; p.vx = -p.vx * 0.8; }
+      var fade = p.b >= 5 ? Math.max(0, 1 - (p.t - 0) * 0.02) : 1;
+      if (p.b >= 7 || p.t > 9) { p.el.remove(); P.splice(i, 1); continue; }
+      p.el.style.transform = 'translate3d(' + p.x + 'px,' + p.y + 'px,0) rotate(' + p.r + 'deg)';
+      if (p.b >= 5) p.el.style.opacity = Math.max(0, 1 - (p.b - 4) / 3);
+    }
+    raf = P.length ? requestAnimationFrame(step) : 0;
+  }
+  // from the roll, desktop: one bill per ~90 px of cursor travel
+  var acc = 0, lx = null, ly = null;
+  document.addEventListener('mousemove', function (e) {
+    if (lx !== null) acc += Math.hypot(e.clientX - lx, e.clientY - ly);
+    lx = e.clientX; ly = e.clientY;
+    if (acc > 90) { acc = 0; emit(e.clientX, e.clientY, (Math.random() - .5) * 400, -200 - Math.random() * 300); }
+  }, { passive: true });
+  // from the roll, phones: bills drop from the strip's end as you scroll
+  var lastY = scrollY, sacc = 0;
+  addEventListener('scroll', function () {
+    sacc += Math.abs(scrollY - lastY); lastY = scrollY;
+    if (sacc > 140) { sacc = 0; var strip = document.getElementById('paper-strip'); if (!strip) return;
+      var y = parseFloat(strip.style.height || '0'); emit(innerWidth - 20, Math.min(y + 10, innerHeight - 100), -150 - Math.random() * 300, -100 - Math.random() * 200); }
+  }, { passive: true });
+  // Make it rain: replace the plain fall with the bouncy one
+  var cheat = document.getElementById('cheat-btn');
+  if (cheat) cheat.addEventListener('click', function () {
+    for (var i = 0; i < 30; i++) (function (i) { setTimeout(function () { emit(Math.random() * innerWidth, -30, (Math.random() - .5) * 300, Math.random() * 200); }, i * 60); })(i);
+  }, true);
+  window.__emitBuck = emit;
 })();

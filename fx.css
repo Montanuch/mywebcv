@@ -151,3 +151,6 @@ details.integration summary::marker { content: "💾 "; }
 .fish.big > span { animation-duration: 3.2s; }
 @keyframes swim { to { transform: translateX(calc(100vw + 260px)); } }
 @keyframes swim-back { from { transform: translateX(calc(100vw + 260px)); } to { transform: translateX(0); } }
+
+/* ---- 20. Bouncing dollars --------------------------------------------- */
+.buck { left: 0; top: 0; font-size: 26px; line-height: 1; z-index: 41; will-change: transform; filter: drop-shadow(1px 2px 0 rgba(0,0,0,.35)); }
