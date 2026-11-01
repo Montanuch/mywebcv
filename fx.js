@@ -289,7 +289,7 @@
   var R = document.documentElement;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var ugly = function () { return R.getAttribute('data-theme') === 'ugly'; };
-  var P = [], raf = 0, lastT = 0, MAX = 45, G = 2200, SYM = ['💵', '💵', '💵', '💶', '🪙', '💸'];
+  var P = [], raf = 0, lastT = 0, MAX = 45, G = 2200, SYM = ['💵', '💵', '💵', '💸'];
   function emit(x, y, vx, vy) {
     if (!ugly() || P.length >= MAX) return;
     var el = document.createElement('div'); el.className = 'fx buck'; el.textContent = SYM[Math.random() * SYM.length | 0];
