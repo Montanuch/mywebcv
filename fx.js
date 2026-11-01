@@ -129,3 +129,30 @@
     ? 'Screen check: ' + screen.width + 'px wide. Congratulations, your monitor is correctly sized for this site.'
     : 'Screen check: your screen is ' + screen.width + 'px wide. This site is optimized for 800×600. Please downgrade.';
 })();
+
+/* 11. Gravity mode + FIX IT. 12. BSOD on the third "Bring back the horror". */
+(function () {
+  'use strict';
+  var R = document.documentElement;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var page = document.querySelector('.page'), g = document.getElementById('gravity-btn'), fix = document.getElementById('fixit');
+  if (g && fix && page) {
+    g.addEventListener('click', function () {
+      if (R.getAttribute('data-theme') !== 'ugly') return;
+      page.querySelectorAll('.box, .hero > *, footer > *, .banner-ad, .ad-footnote').forEach(function (el) { el.style.setProperty('--r', ((Math.random() * 60) - 30).toFixed(0) + 'deg'); });
+      page.classList.add('gravity');
+      setTimeout(function () { fix.hidden = false; }, 1200);
+    });
+    fix.addEventListener('click', function () { page.classList.remove('gravity'); fix.hidden = true; });
+  }
+  var bsod = document.getElementById('bsod'), toggle = document.getElementById('theme-toggle'), backs = 0;
+  if (bsod && toggle) {
+    toggle.addEventListener('click', function () {
+      // script.js has already flipped the theme by now (its listener was attached first)
+      if (R.getAttribute('data-theme') === 'ugly' && ++backs === 3) { bsod.hidden = false; }
+    });
+    var off = function () { bsod.hidden = true; };
+    bsod.addEventListener('click', off);
+    document.addEventListener('keydown', function () { if (!bsod.hidden) off(); });
+  }
+})();

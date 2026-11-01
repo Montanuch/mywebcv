@@ -96,3 +96,18 @@ details.integration summary::marker { content: "💾 "; }
 .screencheck { font-size: 12px; margin: 4px 0; }
 .center { text-align: center; }
 :root[data-theme="ugly"] .win95-btns button { display: inline-block; width: 18px; height: 16px; line-height: 12px; padding: 0; text-align: center; background: #c0c0c0; color: #000; border: 1px outset #fff; margin-left: 2px; font: bold 11px Arial, sans-serif; cursor: pointer; }
+
+/* ---- 11. Gravity mode -------------------------------------------------- */
+.page.gravity .box, .page.gravity .hero > *, .page.gravity footer > *, .page.gravity .banner-ad, .page.gravity .ad-footnote {
+  transition: transform 1.4s cubic-bezier(.5, 0, 1, .6), opacity 1.4s;
+  transform: translateY(110vh) rotate(var(--r, 20deg)); opacity: .9;
+}
+#fixit { left: 50%; top: 40%; transform: translateX(-50%); font: 900 22px "Comic Sans MS", cursive; background: #0f0; color: #000;
+  border: 4px outset #8f8; padding: 14px 24px; cursor: pointer; box-shadow: 6px 6px 0 #000; animation: wobble .6s ease-in-out infinite alternate; }
+#fixit[hidden] { display: none !important; }
+.danger { display: block; margin: 10px auto 0; font: 900 14px "Comic Sans MS", cursive; background: #f00; color: #ff0; border: 3px outset #f88; padding: 6px 14px; cursor: pointer; }
+
+/* ---- 12. BSOD -------------------------------------------------------- */
+#bsod { inset: 0; z-index: 210; background: #0000aa; color: #fff; font: 15px/1.5 "Courier New", monospace; padding: 10vh 6vw; cursor: pointer; white-space: pre-wrap; }
+#bsod[hidden] { display: none !important; }
+#bsod b { background: #aaa; color: #0000aa; padding: 0 6px; }
