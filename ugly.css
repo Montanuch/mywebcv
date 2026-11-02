@@ -383,6 +383,74 @@
 :root[data-theme="ugly"] .quick { justify-content: center; margin: 0 0 12px; position: relative; z-index: 3; }
 :root[data-theme="ugly"] .quick .btn { font-size: 20px; background: #ff0; }
 
+/* ---- The main CTA ----------------------------------------------------
+   PLAY THE GAME has to out-shout sixteen hamsters, so it does not play fair:
+   its own full-width row, chasing lights around it, a flashing fill and a
+   red tag. #play-top also starts the inline demo (fx.js 16). The .cta-loud
+   class is pulsed on by fx.js 23 while nobody has touched it.
+   Everything here is animation/colour only: with prefers-reduced-motion the
+   button falls back to a plain big yellow Win95 button and stays readable. */
+:root[data-theme="ugly"] .quick .cta-li {
+  flex-basis: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  /* 12px of air so the chasing-lights frame (inset -11px) has room to live in */
+  margin: 12px 0 10px; padding: 0 12px; box-sizing: border-box;
+}
+:root[data-theme="ugly"] #play-top {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; box-sizing: border-box;
+  min-height: 0; line-height: 1.1; padding: 16px 20px;
+  font-size: clamp(19px, 6vw, 32px);
+  border-width: 5px; box-shadow: 5px 5px 0 #000;
+  text-align: center; position: relative; z-index: 4;
+  animation: cta-flash .5s steps(1) infinite, cta-breathe 1.1s ease-in-out infinite alternate;
+}
+/* Black text on every frame colour, so the label never drops below 6:1 contrast. */
+@keyframes cta-flash {
+  0%, 49%   { background: #ff0; border-color: #fff; }
+  50%, 100% { background: #0ff; border-color: #f0f; }
+}
+@keyframes cta-breathe { from { transform: scale(1) rotate(-1deg); } to { transform: scale(1.05) rotate(1deg); } }
+
+/* Chasing lights frame, the 1998 way: four 5px light strips that march around. */
+:root[data-theme="ugly"] #play-top::after {
+  content: ""; position: absolute; inset: -11px; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, #f00 0 9px, #ff0 9px 18px) left top / 100% 5px repeat-x,
+    repeating-linear-gradient(90deg, #f00 0 9px, #ff0 9px 18px) left bottom / 100% 5px repeat-x,
+    repeating-linear-gradient(180deg, #f00 0 9px, #ff0 9px 18px) left top / 5px 100% repeat-y,
+    repeating-linear-gradient(180deg, #f00 0 9px, #ff0 9px 18px) right top / 5px 100% repeat-y;
+  animation: cta-ants .35s linear infinite;
+}
+@keyframes cta-ants { to { background-position: left 18px top, left -18px bottom, left top -18px, right top 18px; } }
+
+:root[data-theme="ugly"] .cta-hand { font-size: .8em; animation: cta-point .4s steps(2) infinite alternate; }
+:root[data-theme="ugly"] #play-top .cta-hand:last-of-type { animation-direction: alternate-reverse; }
+@keyframes cta-point { to { transform: translateX(5px); } }
+
+:root[data-theme="ugly"] .cta-tag {
+  background: #f00; color: #fff; font-family: inherit; font-weight: 900; font-size: 14px;
+  padding: 2px 10px; border: 2px solid #000; transform: rotate(-3deg);
+  animation: blink .8s steps(2, start) infinite;
+}
+
+/* Nobody pressed it. Escalate for a few seconds (fx.js 23 adds and removes this). */
+:root[data-theme="ugly"] #play-top.cta-loud {
+  font-size: clamp(21px, 6.7vw, 37px);
+  animation: cta-flash .22s steps(1) infinite, cta-shake .3s ease-in-out infinite;
+}
+:root[data-theme="ugly"] #play-top.cta-loud::after { animation-duration: .15s; }
+@keyframes cta-shake {
+  0%, 100% { transform: translate(0, 0) rotate(-2deg) scale(1.06); }
+  25%      { transform: translate(-4px, 2px) rotate(2deg) scale(1.1); }
+  75%      { transform: translate(4px, -2px) rotate(-3deg) scale(1.1); }
+}
+
+/* Narrow phones: the pointing hands eat the label width, drop them. */
+@media (max-width: 360px) {
+  :root[data-theme="ugly"] .cta-hand { display: none; }
+}
+
 /* fake MIDI player */
 :root[data-theme="ugly"] .midi { display: flex; align-items: center; gap: 6px; background: #222; border: 2px inset #888; color: #0f0; font: 12px "Courier New", monospace; padding: 3px 6px; margin: 0 0 8px; overflow: hidden; white-space: nowrap; }
 :root[data-theme="ugly"] .midi-led { color: #f00; animation: blink .7s steps(2, start) infinite; }

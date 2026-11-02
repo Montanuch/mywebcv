@@ -358,3 +358,31 @@
     });
   });
 })();
+
+/* 23. Nobody pressed PLAY? Make it louder, in bursts, until they do.
+   Only adds/removes a class in the ugly skin; stops for good on the first
+   hover or click, or as soon as the game section is actually on screen. */
+(function () {
+  var R = document.documentElement, b = document.getElementById('play-top');
+  if (!b || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var done = false, onT, offT, io;
+  function schedule(ms) { if (!done) onT = setTimeout(loud, ms); }
+  function loud() {
+    if (done) return;
+    if (R.getAttribute('data-theme') !== 'ugly' || document.hidden) { schedule(10000); return; }
+    b.classList.add('cta-loud');
+    offT = setTimeout(function () { b.classList.remove('cta-loud'); schedule(10000); }, 3500);
+  }
+  function calm() {
+    done = true; clearTimeout(onT); clearTimeout(offT);
+    b.classList.remove('cta-loud'); if (io) io.disconnect();
+  }
+  b.addEventListener('click', calm);
+  b.addEventListener('pointerenter', calm);
+  var game = document.getElementById('game-1');
+  if (game && 'IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) calm(); }, { threshold: 0.3 });
+    io.observe(game);
+  }
+  schedule(6000);
+})();

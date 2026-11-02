@@ -64,7 +64,10 @@
 :root[data-theme="normal"] .event strong { display: block; font-weight: 600; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--gold); margin-bottom: 4px; }
 :root[data-theme="normal"] .where { color: var(--muted); }
 :root[data-theme="normal"] .quick { margin: 18px 0 0; }
-:root[data-theme="normal"] .quick .btn:first-child { background: var(--btn); color: var(--btn-ink); }
+:root[data-theme="normal"] .quick li:first-child .btn {
+  background: var(--btn); color: var(--btn-ink); border-color: transparent;
+  font-size: 16px; padding: 0 26px; min-height: 48px; line-height: 48px;
+}
 
 /* ---- Sections --------------------------------------------------------- */
 :root[data-theme="normal"] .box { padding: 28px 0; border-top: 1px solid var(--line); }
